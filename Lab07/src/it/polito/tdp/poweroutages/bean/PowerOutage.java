@@ -14,9 +14,10 @@ public class PowerOutage {
 	private LocalDateTime inizio ;
 	private LocalDateTime fine ;
 	private int customersAffected ;
+	private boolean scartato ;
 	
 	public PowerOutage() {
-		
+		scartato = false;
 	}
 
 	public PowerOutage(int id, Nerc nerc, LocalDateTime inizio, LocalDateTime fine, int customersAffected) {
@@ -26,6 +27,18 @@ public class PowerOutage {
 		this.inizio = inizio;
 		this.fine = fine;
 		this.customersAffected = customersAffected;
+		scartato = false;
+	}
+
+	public PowerOutage(PowerOutage po) {
+		this.id = po.id;
+		this.eventType = po.eventType;
+		this.tag = po.getTag();
+		this.nerc = po.getNerc();
+		this.inizio = po.getInizio();
+		this.fine = po.getFine();
+		this.customersAffected = po.getCustomersAffected();
+		scartato = false ;
 	}
 
 	public int getId() {
@@ -109,18 +122,21 @@ public class PowerOutage {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("PowerOutage [id=");
-		builder.append(id);
-		builder.append(", nerc=");
-		builder.append(nerc);
-		builder.append(", inizio=");
+		
 		builder.append(inizio);
-		builder.append(", fine=");
+		builder.append(" ");
 		builder.append(fine);
-		builder.append(", customersAffected=");
+		builder.append(" ");
 		builder.append(customersAffected);
-		builder.append("]");
 		return builder.toString();
+	}
+
+	public boolean isScartato() {
+		return scartato;
+	}
+
+	public void setScartato(boolean scartato) {
+		this.scartato = scartato;
 	}
 	
 	

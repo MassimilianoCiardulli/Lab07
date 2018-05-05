@@ -68,8 +68,14 @@ public class PowerOutagesController {
     			n = ntemp ;
     	
     	List<PowerOutage> result = model.getListaBlackout(n, years, h);
-    	
-    	txtArea.setText(result.toString());
+    	int customers = model.calcolaCustomers(result);
+    	txtArea.setText("Tot people affected : " + customers + "\n");
+    	int ore = model.calcolaOre(result);
+    	txtArea.appendText("Tot hours of outage : " + ore + "\n");
+
+    	for(PowerOutage po:result) {
+    		txtArea.appendText(po + "\n");
+    	}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
